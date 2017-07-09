@@ -36,6 +36,8 @@ renderYearOfCiteResultsTab <- function(output, P1, P2) {
   citesA <- get_citation_history(P1$id)
   citesB <- get_citation_history(P2$id)
   
+  if(nrow(citesA) == 0 || nrow(citesB) == 0) return(NULL)
+  
   rA <- citesA$cites
   names(rA) <- citesA$year
   rB <- citesB$cites
@@ -114,5 +116,5 @@ renderYearOfPubResultsTab <- function(output, P1, P2) {
 render <- function(output, P1, P2) {
   renderMainResultsTab(output, P1, P2)
   YearOfCite <- renderYearOfCiteResultsTab(output, P1, P2)
-  YearOfPub <- renderYearOfPubResultsTab(output, P1, P2)
+  if(!is.null(YearOfCite)) YearOfPub <- renderYearOfPubResultsTab(output, P1, P2)
 }
