@@ -8,7 +8,15 @@ renderMainResultsTab <- function(output, P1, P2) {
   vs <- cbind(rA, rB, c(rep("X", length(rA))))
   
   vs[rA > rB, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins!</font></b>")
+  vs[rA >= rB*2, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(X2)</font></b>")
+  vs[rA >= rB*3, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(X3)</font></b>")
+  vs[rA >= rB*5, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(PERFECT!)</font></b>")
+  vs[rA >= rB*10, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(Finish Him! FATALITY!)</font></b>")
   vs[rA < rB, 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins!</font></b>")
+  vs[rA*2 <= rB, 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(X2)</font></b>")
+  vs[rA*3 <= rB, 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(X3)</font></b>")
+  vs[rA*5 <= rB, 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(PERFECT!)</font></b>")
+  vs[rA*10 <= rB, 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(Finish Him! FATALITY!)</font></b>")
   vs[rA == rB, 3] <- paste("<b><font color='#808080'>Draw!</font></b>")
   
   colnames(vs) <- c(paste("<b><font color='#ff8c00'>", P1$name, "</font></b>"),
@@ -37,7 +45,15 @@ renderYearOfCiteResultsTab <- function(output, P1, P2) {
   vs <- vs[order(rownames(vs)), ]
   
   vs[as.numeric(vs[, 1]) > as.numeric(vs[, 2]), 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins!</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*2, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(X2)</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*3, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(X3)</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*5, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(PERFECT!)</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*10, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(Finish Him! FATALITY!)</font></b>")
   vs[as.numeric(vs[, 1]) < as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins!</font></b>")
+  vs[as.numeric(vs[, 1])*2 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(X2)</font></b>")
+  vs[as.numeric(vs[, 1])*3 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(X3)</font></b>")
+  vs[as.numeric(vs[, 1])*5 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(PERFECT!)</font></b>")
+  vs[as.numeric(vs[, 1])*10 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(Finish Him! FATALITY!)</font></b>")
   vs[as.numeric(vs[, 1]) == as.numeric(vs[, 2]), 3] <- paste("<b><font color='#808080'>Draw!</font></b>")
   
   colnames(vs) <- c(paste("<b><font color='#ff8c00'>", P1$name, "</font></b>"),
@@ -55,8 +71,8 @@ renderYearOfCiteResultsTab <- function(output, P1, P2) {
 }
 
 renderYearOfPubResultsTab <- function(output, P1, P2) {
-  citesA <- compare_scholars(P1$id, 300)
-  citesB <- compare_scholars(P2$id, 300)
+  citesA <- compare_scholars(P1$id, 1000)
+  citesB <- compare_scholars(P2$id, 1000)
   
   citesA <- citesA[complete.cases(citesA), ]
   citesB <- citesB[complete.cases(citesB), ]
@@ -70,7 +86,15 @@ renderYearOfPubResultsTab <- function(output, P1, P2) {
   vs <- vs[order(rownames(vs)), ]
   
   vs[as.numeric(vs[, 1]) > as.numeric(vs[, 2]), 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins!</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*2, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(X2)</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*3, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(X3)</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*5, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(PERFECT!)</font></b>")
+  vs[as.numeric(vs[, 1]) >= as.numeric(vs[, 2])*10, 3] <- paste("<b><font color='#ff8c00'>", P1$name, "wins! </font><font color=red>(Finish Him! FATALITY!)</font></b>")
   vs[as.numeric(vs[, 1]) < as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins!</font></b>")
+  vs[as.numeric(vs[, 1])*2 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(X2)</font></b>")
+  vs[as.numeric(vs[, 1])*3 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(X3)</font></b>")
+  vs[as.numeric(vs[, 1])*5 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(PERFECT!)</font></b>")
+  vs[as.numeric(vs[, 1])*10 <= as.numeric(vs[, 2]), 3] <- paste("<b><font color='#0073ff'>", P2$name, "wins! </font><font color=red>(Finish Him! FATALITY!)</font></b>")
   vs[as.numeric(vs[, 1]) == as.numeric(vs[, 2]), 3] <- paste("<b><font color='#808080'>Draw!</font></b>")
   
   colnames(vs) <- c(paste("<b><font color='#ff8c00'>", P1$name, "</font></b>"),
