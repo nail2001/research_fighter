@@ -1,12 +1,5 @@
 library(shiny)
 
-library(R.cache)
-library(dplyr)
-library(httr)
-library(rvest)
-library(stringr)
-library(xml2)
-
 source("scholar.R")
 source("render.R")
 source("data.R")
