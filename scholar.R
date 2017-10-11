@@ -23,7 +23,7 @@ library(xml2)
 ##' 
 ##' @name scholar
 ##' @docType package
-NULL
+options("scholar_call_home"=TRUE)
 
 
 ##' Ensures that specified IDs are correctly formatted
@@ -116,6 +116,14 @@ get_profile <- function(id) {
               homepage=homepage))
 }
 
+substrRight <- function(x, n) {
+  substr(x, nchar(x)-n+1, nchar(x))
+}
+
+lastNumber <- function(x) {
+  gsub("[^0-9]", "", substrRight(x, 2))
+}
+
 ##' Get historical citation data for a scholar
 ##'
 ##' Gets the number of citations to a scholar's articles over the past
@@ -147,8 +155,12 @@ get_citation_history <- function(id) {
   page <- GET(url, handle=getOption("scholar_handle")) %>% read_html()
   years <- page %>% html_nodes(xpath="//*/span[@class='gsc_g_t']") %>% html_text() %>% as.numeric()
   vals <- page %>% html_nodes(xpath="//*/span[@class='gsc_g_al']") %>% html_text() %>% as.numeric()
+  vals_z <- page %>% html_nodes(xpath="//*/a[@class='gsc_g_a']") %>% html_attr("style") %>% lastNumber() %>% as.numeric()
   
-  df <- data.frame(year=years, cites=vals)
+  df <- data.frame(year=years, cites=rep(0, length(years)))
+  df<- df[seq(dim(df)[1],1),]
+  df$cites[vals_z] <- vals
+  df<- df[seq(dim(df)[1],1),]
   
   return(df)
 }
