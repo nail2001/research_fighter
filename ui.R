@@ -40,7 +40,8 @@ shinyUI(
       ),
       
       mainPanel(
-        tableOutput("mainVsTable"),
+        htmlOutput("result"),
+        tableOutput("totalCitesAndIndexVsTable"),
         tableOutput("yearOfCiteVsTable"),
         tableOutput("yearOfPubVsTable"),
         plotOutput("yearOfCite"),
